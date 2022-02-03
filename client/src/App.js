@@ -1,7 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import './App.css';
+import { bem } from './utils/bem';
+import './app.less';
+
+const classname = bem('app');
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -13,7 +16,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className={classname()}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>{!data ? "Loading..." : data}</p>
