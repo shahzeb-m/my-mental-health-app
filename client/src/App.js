@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import { bem } from './utils/bem';
 import './app.less';
+import { Layout } from './components/Layout';
 
 const classname = bem('app');
 
@@ -16,13 +15,10 @@ function App() {
   }, []);
 
   return (
-    <div className={classname()}>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? 'Loading...' : data}</p>
-        <Counter />
-      </header>
-    </div>
+    // <div className={classname()}>
+    //   <div>{!data ? 'Loading...' : data}</div>
+    // </div>
+    <Layout />
   );
 }
 
