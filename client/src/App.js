@@ -10,16 +10,16 @@ function App() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/api")
-        .then((res) => res.json())
-        .then((data) => setData(data.message));
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
   }, []);
 
   return (
     <div className={classname()}>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
+        <p>{!data ? 'Loading...' : data}</p>
         <Counter />
       </header>
     </div>
