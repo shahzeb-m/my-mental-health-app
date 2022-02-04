@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { bem } from './utils/bem';
+import './app.less';
+import { Layout } from './components/Layout';
+
+const classname = bem('app');
 
 function App() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/api")
-        .then((res) => res.json())
-        .then((data) => setData(data.message));
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-        <Counter />
-      </header>
-    </div>
+    // <div className={classname()}>
+    //   <div>{!data ? 'Loading...' : data}</div>
+    // </div>
+    <Layout />
   );
 }
 
