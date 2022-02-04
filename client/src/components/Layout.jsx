@@ -1,9 +1,9 @@
 import { Masthead } from './Masthead';
-import { Home } from './pages/Home';
 import './layout.less';
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { BREAKPOINTS } from '../utils/consts';
+import { Content } from './Content';
 
 export const LayoutContext = React.createContext({
   isDesktop: false,
@@ -30,7 +30,7 @@ export function Layout() {
     <LayoutContext.Provider
       value={{ isDesktop, isTabletLarge, isTabletSmall, isMobile }}>
       <Masthead />
-      <Home />
+      <Content />
     </LayoutContext.Provider>
   );
 }

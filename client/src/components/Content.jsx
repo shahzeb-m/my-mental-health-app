@@ -1,11 +1,13 @@
 import { bem } from '../utils/bem';
-import './masthead.less';
-import React from 'react';
+import './content.less';
 import { LayoutContext } from './Layout';
+import React from 'react';
+import { Home } from './pages/Home';
 
-const classname = bem('masthead');
+const classname = bem('content');
 
-export function Masthead() {
+// this component will handle the rendering of the selected page/activity
+export function Content() {
   const { isDesktop, isTabletLarge, isTabletSmall, isMobile } =
     React.useContext(LayoutContext);
 
@@ -17,7 +19,12 @@ export function Masthead() {
           (isTabletSmall && 'tablet-small') ||
           (isMobile && 'mobile'),
       ).mix(classname())}>
-      Masthead
+      {JSON.stringify({ isDesktop, isTabletLarge, isTabletSmall, isMobile })}
     </div>
   );
+  // return (
+  //   <div className={classname()}>
+  //     <Home />
+  //   </div>
+  // );
 }
