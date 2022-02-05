@@ -1,26 +1,37 @@
 .mental-health-masthead {
-  background: aqua;
-  height: 32px;
-  display: flex;
-  //TODO make masthead sticky on scroll
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: block;
 
   &__desktop {
-    padding: 24px;
-    max-width: available;
+    padding: 0 12px 0 24px;
+    max-width: 1536px;
   }
 
   &__tablet-large {
-    padding: 24px;
+    padding: 0 12px 0 24px;
     max-width: 1024px;
   }
 
   &__tablet-small {
-    padding: 24px 16px;
+    padding: 0 8px;
     max-width: 768px;
   }
 
   &__mobile {
-    padding: 16px 8px;
+    padding: 0 4px;
     max-width: 480px;
+  }
+
+  &__toolbar {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: 64px;
+    &__mobile {
+      min-height: 56px;
+    }
   }
 }
