@@ -1,30 +1,24 @@
-import { bem } from '../utils/bem';
 import './content.less';
-import { LayoutContext } from './Layout';
 import React from 'react';
 import { Home } from './pages/Home';
-
-const classname = bem('content');
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import { ContentWrapper } from './ContentWrapper';
 
 // this component will handle the rendering of the selected page/activity
 export function Content() {
-  const { isDesktop, isTabletLarge, isTabletSmall, isMobile } =
-    React.useContext(LayoutContext);
-
   return (
-    <div
-      className={classname(
-        (isDesktop && 'desktop') ||
-          (isTabletLarge && 'tablet-large') ||
-          (isTabletSmall && 'tablet-small') ||
-          (isMobile && 'mobile'),
-      ).mix(classname())}>
-      {JSON.stringify({ isDesktop, isTabletLarge, isTabletSmall, isMobile })}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/" element={<ContentWrapper />}>
+          <Route path="home" element={<Home />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-  // return (
-  //   <div className={classname()}>
-  //     <Home />
-  //   </div>
-  // );
 }
