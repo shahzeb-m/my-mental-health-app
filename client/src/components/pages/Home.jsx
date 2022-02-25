@@ -13,6 +13,8 @@ import {
 import { LayoutContext } from '../Layout';
 import { MoodWidget } from '../widgets/MoodWidget';
 import { GratitudeWidget } from '../widgets/GratitudeWidget';
+import { ToDoWidget } from '../widgets/ToDoWidget';
+import { KnowledgeWidget } from '../widgets/KnowledgeWidget';
 
 const classname = bem('home');
 
@@ -39,7 +41,7 @@ export function Home() {
   return (
     <div className={classname()}>
       <Typography variant={headerFont} py={paddingValue}>
-        Welcome, User
+        Welcome, Shahzeb
       </Typography>
       <Quote />
       <Box sx={{ flexGrow: 1 }}>
@@ -47,8 +49,10 @@ export function Home() {
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 2, sm: 8, md: 12 }}>
-          <MoodWidget />
+          <KnowledgeWidget />
           <GratitudeWidget />
+          <ToDoWidget />
+          <MoodWidget />
           {/*{Array.from(Array(6)).map((_, index) => (*/}
           {/*  <Grid item xs={2} sm={4} md={4} key={index}>*/}
           {/*    <Card sx={{ minWidth: 275 }}>*/}

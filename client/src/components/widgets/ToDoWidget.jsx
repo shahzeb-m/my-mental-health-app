@@ -7,25 +7,22 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import '@progress/kendo-theme-default/dist/all.css';
+import { ToDoList } from '../ToDoList';
 
-export function MoodWidget() {
+export function ToDoWidget() {
   return (
     <Grid item xs={2} sm={4} md={4}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h5" component="div">
-            Mood Logged
+            Today's To-Do
           </Typography>
-          <Typography variant="h4" align="center" py={2} color="#1976d2">
-            13
-          </Typography>
-          <Typography variant="body2" align="center">
-            days in a row. Well done!
-          </Typography>
+          <ToDoList />
         </CardContent>
         <CardActions>
-          <Button size="small" href="/mood-journal/new-entry">
-            Log your mood
+          <Button size="small" href="/my-to-do">
+            Go to My To-Do
           </Button>
         </CardActions>
       </Card>
