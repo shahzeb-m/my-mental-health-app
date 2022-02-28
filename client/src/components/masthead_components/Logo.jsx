@@ -3,6 +3,7 @@ import { LayoutContext } from '../Layout';
 import { bem } from '../../utils/bem';
 import './logo.less';
 import appLogo from '../../assets/app_logo_white.svg';
+import { Link } from 'react-router-dom';
 
 const classname = bem('masthead-logo');
 
@@ -17,7 +18,14 @@ export function Logo() {
           (isTabletSmall && 'tablet-small') ||
           (isMobile && 'mobile'),
       )}>
-      <img src={appLogo} className={classname('image')} />
+      <a href="/home">
+        <img
+          alt="MindSpa Logo"
+          title="MindSpa Logo"
+          src={appLogo}
+          className={classname('image')}
+        />
+      </a>
     </div>
   );
 }
