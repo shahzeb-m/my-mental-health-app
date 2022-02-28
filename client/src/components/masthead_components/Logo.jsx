@@ -1,8 +1,8 @@
-import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { LayoutContext } from '../Layout';
 import { bem } from '../../utils/bem';
 import './logo.less';
+import appLogo from '../../assets/app_logo_white.svg';
 
 const classname = bem('masthead-logo');
 
@@ -17,9 +17,7 @@ export function Logo() {
           (isTabletSmall && 'tablet-small') ||
           (isMobile && 'mobile'),
       )}>
-      <Typography variant="h6" noWrap component="div">
-        LOGO
-      </Typography>
+      <img src={appLogo} className={classname('image')} />
     </div>
   );
 }

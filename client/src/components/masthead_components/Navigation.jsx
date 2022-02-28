@@ -33,7 +33,7 @@ export function Navigation() {
     setAnchorElNav(null);
   };
   return (
-    <div className={classname()}>
+    <div className={classname((isMobile || isTabletSmall) && 'small')}>
       {isMobile || isTabletSmall ? (
         <>
           <IconButton
