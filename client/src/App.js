@@ -16,9 +16,8 @@ function App() {
 
   return (
     // <div className={classname()}>
-    //   <div>{!data ? 'Loading...' : data}</div>
-    // </div>
     <Layout />
+    // </div>
   );
 }
 

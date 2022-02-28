@@ -13,11 +13,12 @@ const classname = bem('masthead-navigation');
 
 //TODO create object of key/name pairs to use key as href for page
 const pages = [
-  'Mood Tracker',
+  'Mood Journal',
+  'Gratitude Wall',
   'Worry Not',
+  'My To-do',
   'Knowledge Hub',
   'Breathing',
-  'PHQ-9',
 ];
 
 export function Navigation() {
@@ -32,7 +33,7 @@ export function Navigation() {
     setAnchorElNav(null);
   };
   return (
-    <div className={classname()}>
+    <div className={classname((isMobile || isTabletSmall) && 'small')}>
       {isMobile || isTabletSmall ? (
         <>
           <IconButton

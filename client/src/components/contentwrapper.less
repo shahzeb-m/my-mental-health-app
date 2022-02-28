@@ -1,0 +1,29 @@
+.mental-health-content-wrapper {
+  margin: 0 auto;
+  display: flex;
+  overflow-wrap: anywhere; // does not work on safari
+  height: 100%;
+  min-height: 100vh;
+  background: lightgrey;
+  box-sizing: border-box;
+
+  &__desktop {
+    padding: 24px;
+    max-width: 1440px;
+  }
+
+  &__tablet-large {
+    padding: 24px;
+    max-width: 1024px;
+  }
+
+  &__tablet-small {
+    padding: 24px 16px;
+    max-width: 768px;
+  }
+
+  &__mobile {
+    padding: 16px 8px;
+    max-width: 480px;
+  }
+}
