@@ -2,9 +2,15 @@ import { Masthead } from './Masthead';
 import './layout.less';
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { BREAKPOINTS } from '../utils/consts';
+import { BREAKPOINTS, THEME_COLOURS } from '../utils/consts';
 import { Content } from './Content';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { bem } from '../utils/bem';
+import './layout.less';
+import { useSelector } from 'react-redux';
+import { selectThemeColour } from '../features/userSlice';
+
+const classname = bem('layout');
 
 export const LayoutContext = React.createContext({
   isDesktop: false,
@@ -13,25 +19,8 @@ export const LayoutContext = React.createContext({
   isMobile: false,
 });
 
-// Not needed at the moment. Keeping in for future use of theme (05/02/2022)
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      mobile: BREAKPOINTS.MOBILE,
-      tabletSmall: BREAKPOINTS.SMALL_TABLET,
-      tabletLarge: BREAKPOINTS.LARGE_TABLET,
-      desktop: BREAKPOINTS.DESKTOP,
-      // TODO remove default breakpoints below when no longer needed
-      xl: 1536,
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-    },
-  },
-});
-
 export function Layout() {
+  const themeColour = useSelector(selectThemeColour);
   const isDesktop = useMediaQuery({ minWidth: BREAKPOINTS.DESKTOP });
   const isTabletLarge =
     useMediaQuery({ minWidth: BREAKPOINTS.LARGE_TABLET }) && !isDesktop;
@@ -45,12 +34,38 @@ export function Layout() {
     !isTabletLarge &&
     !isDesktop;
 
+  const theme = createTheme({
+    palette: {
+      primary: THEME_COLOURS[themeColour],
+      background: {
+        default: THEME_COLOURS[themeColour].bg,
+      },
+    },
+    breakpoints: {
+      values: {
+        mobile: BREAKPOINTS.MOBILE,
+        tabletSmall: BREAKPOINTS.SMALL_TABLET,
+        tabletLarge: BREAKPOINTS.LARGE_TABLET,
+        desktop: BREAKPOINTS.DESKTOP,
+        // TODO remove default breakpoints below when no longer needed
+        xl: 1536,
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+      },
+    },
+  });
+
   return (
     <LayoutContext.Provider
       value={{ isDesktop, isTabletLarge, isTabletSmall, isMobile }}>
       <ThemeProvider theme={theme}>
-        <Masthead />
-        <Content />
+        <CssBaseline />
+        <div className={classname()}>
+          <Masthead />
+          <Content />
+        </div>
       </ThemeProvider>
     </LayoutContext.Provider>
   );
