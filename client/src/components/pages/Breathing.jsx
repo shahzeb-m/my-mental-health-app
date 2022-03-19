@@ -16,7 +16,7 @@ export function Breathing() {
   const paddingValue = isDesktop || isTabletLarge ? 3 : isTabletSmall ? 2 : 1;
   return (
     <div className={classname()}>
-      <Typography variant={headerFont} py={paddingValue}>
+      <Typography variant={headerFont} pb={paddingValue}>
         Breathing Exercise
       </Typography>
       <div className={classname('animation_container')}>
