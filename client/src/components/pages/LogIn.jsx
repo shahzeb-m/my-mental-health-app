@@ -14,7 +14,7 @@ import { bem } from '../../utils/bem';
 import { LayoutContext } from '../Layout';
 import { useDispatch } from 'react-redux';
 import _ from 'lodash';
-import { login } from '../../features/userSlice';
+import { getMoods, login } from '../../features/userSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const classname = bem('log-in');
@@ -46,6 +46,7 @@ const LogIn = () => {
       const res = await response.json();
       if (res.success) {
         dispatch(login({ user: _.omit(res.data, 'password') }));
+        dispatch(getMoods());
         navigate(redirectPath, { replace: true });
       } else {
         setErrorMessage(res.message);

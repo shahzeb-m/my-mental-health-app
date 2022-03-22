@@ -99,10 +99,6 @@ router.get("/get-colour", async (req, res) => {
   }
 });
 
-router.patch("/test/:id", async (req, res) => {
-  res.json({ message: "test", params: req.category });
-});
-
 // delete one
 router.delete("/delete", async (req, res) => {
   const user = User.findById(req.user._id);

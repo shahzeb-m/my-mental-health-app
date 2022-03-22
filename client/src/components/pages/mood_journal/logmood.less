@@ -2,4 +2,40 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  &__content--large {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  &__mood_selector--large {
+    width: 25%;
+    min-width: fit-content;
+    padding-right: 48px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    & button:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+
+  &__mood_selector--small {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: inherit;
+    & button:not(:first-child) {
+      margin-top: 16px;
+    }
+    padding-bottom: 16px;
+  }
+
+  &__comments {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }

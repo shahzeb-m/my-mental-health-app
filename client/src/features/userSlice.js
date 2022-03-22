@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { updateQuoteCategoryDB, updateThemeColourDB } from '../api/users';
+import { getMoodsDB } from '../api/mood';
 
 export const updateThemeColour = createAsyncThunk(
   'users/updateThemeColour',
@@ -16,6 +17,10 @@ export const updateQuoteCategory = createAsyncThunk(
     return category;
   },
 );
+
+export const getMoods = createAsyncThunk('mood/getMoods', async () => {
+  return await getMoodsDB();
+});
 
 export const userSlice = createSlice({
   name: 'user',
@@ -40,6 +45,9 @@ export const userSlice = createSlice({
       })
       .addCase(updateQuoteCategory.fulfilled, (state, action) => {
         state.app.user = { ...state.app.user, quoteCategory: action.payload };
+      })
+      .addCase(getMoods.fulfilled, (state, action) => {
+        state.app = { ...state.app, moods: action.payload };
       }),
 });
 
@@ -48,4 +56,5 @@ export const selectUser = (state) => (state.app ? state.app.user : null);
 export const selectThemeColour = (state) =>
   state.app?.user.themeColour || 'default';
 export const selectQuoteCategory = (state) => state.app?.user.quoteCategory;
+export const selectMoods = (state) => state.app?.moods;
 export default userSlice.reducer;

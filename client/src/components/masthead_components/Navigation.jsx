@@ -11,12 +11,12 @@ import Button from '@mui/material/Button';
 const classname = bem('masthead-navigation');
 
 const pages = [
-  { label: 'Mood Journal', href: 'mood-journal' },
-  { label: 'Gratitude Wall', href: 'gratitude-wall' },
-  { label: 'Worry Not', href: 'worry-not' },
-  { label: 'My To-do', href: 'my-to-do' },
-  { label: 'Knowledge Hub', href: 'knowledge-hub' },
-  { label: 'Breathing', href: 'breathing' },
+  { label: 'Mood Journal', href: '/mood-journal' },
+  { label: 'Gratitude Wall', href: '/gratitude-wall' },
+  { label: 'Worry Not', href: '/worry-not' },
+  { label: 'My To-do', href: '/my-to-do' },
+  { label: 'Knowledge Hub', href: '/knowledge-hub' },
+  { label: 'Breathing', href: '/breathing' },
 ];
 
 export function Navigation() {
@@ -59,6 +59,7 @@ export function Navigation() {
             onClose={handleCloseNavMenu}>
             {pages.map((page) => (
               <MenuItem
+                component="a"
                 key={page.href}
                 href={page.href}
                 onClick={handleCloseNavMenu}>

@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const usersRouter = require("./routes/users");
+const moodsRouter = require("./routes/moods");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
@@ -39,6 +40,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use("/api/users", usersRouter);
+app.use("/api/mood", moodsRouter);
 
 // handle GET requests to /api route
 app.get("/api", (req, res) => {
