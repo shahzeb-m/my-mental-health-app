@@ -4,6 +4,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const usersRouter = require("./routes/users");
 const moodsRouter = require("./routes/moods");
+const gratitudePostsRouter = require("./routes/gratitudePosts");
+const todosRouter = require("./routes/todos");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
@@ -41,6 +43,8 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use("/api/users", usersRouter);
 app.use("/api/mood", moodsRouter);
+app.use("/api/gratitude", gratitudePostsRouter);
+app.use("/api/todo", todosRouter);
 
 // handle GET requests to /api route
 app.get("/api", (req, res) => {

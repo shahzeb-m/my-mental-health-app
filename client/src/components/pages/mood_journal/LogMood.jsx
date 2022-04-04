@@ -36,6 +36,8 @@ export function LogMood() {
 
   const saveMood = async () => {
     const date = new Date();
+    // const yesterday = new Date(date);
+    // yesterday.setDate(yesterday.getDate() - 1);
     const mood = { rating: selected, comment: comment, date: date };
     try {
       const res = await updateMoodsDB(mood);
@@ -75,7 +77,7 @@ export function LogMood() {
   return (
     <div className={classname()}>
       <Typography variant={headerFont} pb={paddingValue}>
-        Mood Journal: Log Mood
+        Log Mood
       </Typography>
       <div
         className={classname('content', {

@@ -13,12 +13,14 @@ import { MoodJournal } from './pages/mood_journal/MoodJournal';
 import { LogMood } from './pages/mood_journal/LogMood';
 import { GratitudeWall } from './pages/gratitude_wall/GratitudeWall';
 import { PostGratitude } from './pages/gratitude_wall/PostGratitude';
-import { MyToDo } from './pages/MyToDo';
+import { MyToDo } from './pages/my_to_do/MyToDo';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import Settings from './pages/Settings';
 import { RequireAuth } from './RequireAuth';
 import { Breathing } from './pages/Breathing';
+import { AddToDo } from './pages/my_to_do/AddToDo';
+import { WorryNot } from './pages/WorryNot';
 
 // this component will handle the rendering of the selected page/activity
 export function Content() {
@@ -40,6 +42,14 @@ export function Content() {
             element={
               <RequireAuth>
                 <KnowledgeHub />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="worry-not"
+            element={
+              <RequireAuth>
+                <WorryNot />
               </RequireAuth>
             }
           />
@@ -80,6 +90,14 @@ export function Content() {
             element={
               <RequireAuth>
                 <MyToDo />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="my-to-do/new-entry"
+            element={
+              <RequireAuth>
+                <AddToDo />
               </RequireAuth>
             }
           />

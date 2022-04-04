@@ -1,7 +1,7 @@
 import { bem } from '../../utils/bem';
 import './home.less';
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Skeleton, Typography } from '@mui/material';
 import { LayoutContext } from '../Layout';
 import { MoodWidget } from '../widgets/MoodWidget';
 import { GratitudeWidget } from '../widgets/GratitudeWidget';
@@ -34,10 +34,10 @@ const Quote = () => {
   return (
     <div className={classname('quote')}>
       <Typography variant={'subtitle1'} align={'center'}>
-        {quote.length ? `"${quote}"` : 'Loading...'}
+        {quote.length ? `"${quote}"` : <Skeleton variant="text" width={300} />}
       </Typography>
       <Typography variant={'subtitle1'} fontStyle={'italic'}>
-        {author.length && `— ${author}`}
+        {author.length ? `— ${author}` : null}
       </Typography>
     </div>
   );
@@ -57,7 +57,7 @@ export function Home() {
         Welcome, {user.name}
       </Typography>
       <Quote />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, pb: 2 }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -66,23 +66,6 @@ export function Home() {
           <GratitudeWidget />
           <ToDoWidget />
           <MoodWidget />
-          {/*{Array.from(Array(6)).map((_, index) => (*/}
-          {/*  <Grid item xs={2} sm={4} md={4} key={index}>*/}
-          {/*    <Card sx={{ minWidth: 275 }}>*/}
-          {/*      <CardContent>*/}
-          {/*        <Typography variant="h5" component="div">*/}
-          {/*          This is a widget title*/}
-          {/*        </Typography>*/}
-          {/*        <Typography variant="body2">*/}
-          {/*          this is a widget caption*/}
-          {/*        </Typography>*/}
-          {/*      </CardContent>*/}
-          {/*      <CardActions>*/}
-          {/*        <Button size="small">This is a widget button</Button>*/}
-          {/*      </CardActions>*/}
-          {/*    </Card>*/}
-          {/*  </Grid>*/}
-          {/*))}*/}
         </Grid>
       </Box>
     </div>

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { updateQuoteCategoryDB, updateThemeColourDB } from '../api/users';
 import { getMoodsDB } from '../api/mood';
+import { getGratitudePostsDB } from '../api/gratitudePost';
+import { getTodosDB } from '../api/todos';
 
 export const updateThemeColour = createAsyncThunk(
   'users/updateThemeColour',
@@ -22,6 +24,17 @@ export const getMoods = createAsyncThunk('mood/getMoods', async () => {
   return await getMoodsDB();
 });
 
+export const getGratitudePosts = createAsyncThunk(
+  'gratitude/getGratitudePosts',
+  async () => {
+    return await getGratitudePostsDB();
+  },
+);
+
+export const getTodos = createAsyncThunk('todo/getTodos', async () => {
+  return await getTodosDB();
+});
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -29,8 +42,6 @@ export const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      // const colour = await getThemeColour();
-      // state.app = { ...action.payload, themeColour: colour };
       state.app = action.payload;
       console.log(state.app);
     },
@@ -48,6 +59,12 @@ export const userSlice = createSlice({
       })
       .addCase(getMoods.fulfilled, (state, action) => {
         state.app = { ...state.app, moods: action.payload };
+      })
+      .addCase(getGratitudePosts.fulfilled, (state, action) => {
+        state.app = { ...state.app, gratitudePosts: action.payload };
+      })
+      .addCase(getTodos.fulfilled, (state, action) => {
+        state.app = { ...state.app, todos: action.payload };
       }),
 });
 
@@ -57,4 +74,6 @@ export const selectThemeColour = (state) =>
   state.app?.user.themeColour || 'default';
 export const selectQuoteCategory = (state) => state.app?.user.quoteCategory;
 export const selectMoods = (state) => state.app?.moods;
+export const selectGratitudePosts = (state) => state.app?.gratitudePosts;
+export const selectTodos = (state) => state.app?.todos;
 export default userSlice.reducer;

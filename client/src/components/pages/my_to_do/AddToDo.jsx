@@ -1,39 +1,42 @@
 import { bem } from '../../../utils/bem';
-import './postgratitude.less';
+import './addtodo.less';
 import React, { useState } from 'react';
 import { Alert, Button, Snackbar, TextField, Typography } from '@mui/material';
 import { LayoutContext } from '../../Layout';
-import { getGratitudePosts } from '../../../features/userSlice';
-import { updateGratitudePosts } from '../../../api/gratitudePost';
-import { useDispatch } from 'react-redux';
 import SaveIcon from '@mui/icons-material/Save';
+import DateAdapter from '@mui/lab/AdapterDateFns';
+import { DateTimePicker, LocalizationProvider } from '@mui/lab';
+import { getTodos } from '../../../features/userSlice';
+import { updateTodos } from '../../../api/todos';
+import { useDispatch } from 'react-redux';
 
-const classname = bem('post-gratitude');
+const classname = bem('add-to-do');
 
-export function PostGratitude() {
+export function AddToDo() {
   const { isDesktop, isTabletLarge, isTabletSmall } =
     React.useContext(LayoutContext);
-  const [content, setContent] = useState('I am grateful for ');
+  const dispatch = useDispatch();
+  const [content, setContent] = useState('');
+  const currentDate = new Date();
+  const [date, setDate] = useState(currentDate);
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
   const [showSaveFail, setShowSaveFail] = useState(false);
   const [showInvalid, setShowInvalid] = useState(false);
-  const dispatch = useDispatch();
 
   const headerFont =
     isDesktop || isTabletLarge ? 'h2' : isTabletSmall ? 'h3' : 'h4';
   const paddingValue = isDesktop || isTabletLarge ? 3 : isTabletSmall ? 2 : 1;
 
-  const savePost = async () => {
-    const date = new Date();
-    const post = { content: content, date: date };
+  const saveTodo = async () => {
+    const todo = { task: content, date: date };
     try {
-      const res = await updateGratitudePosts(post);
+      const res = await updateTodos(todo);
       if (res.status !== 201) {
         setShowSaveFail(true);
       } else {
         setShowSaveSuccess(true);
-        await dispatch(getGratitudePosts());
-        window.location.href = '/gratitude-wall';
+        await dispatch(getTodos());
+        window.location.href = '/my-to-do';
       }
     } catch (err) {
       console.log(err);
@@ -42,11 +45,15 @@ export function PostGratitude() {
   };
 
   const handleSave = () => {
-    content.length ? savePost() : setShowInvalid(true);
+    content.length ? saveTodo() : setShowInvalid(true);
   };
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
+  };
+  const handleDateChange = (newValue) => {
+    console.log('date: ', newValue);
+    setDate(newValue);
   };
 
   const handleSaveSuccessClose = () => {
@@ -60,22 +67,32 @@ export function PostGratitude() {
   const handleInvalidClose = () => {
     setShowInvalid(false);
   };
-
   return (
     <div className={classname()}>
       <Typography variant={headerFont} pb={paddingValue}>
-        Add to Gratitude Wall
+        Add a To-Do
       </Typography>
-      <Typography variant="h6">What are you grateful for? </Typography>
+      <Typography variant="h6">What do you want to do? </Typography>
       <TextField
         id="outlined-multiline-flexible"
-        label="Write what you are grateful for here..."
+        label="Enter To-Do here..."
         multiline
         maxRows={8}
         value={content}
         onChange={handleContentChange}
-        sx={{ mt: 2, minWidth: '275px' }}
+        sx={{ my: 2, minWidth: '275px' }}
       />
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <DateTimePicker
+          label="Date & Time"
+          inputFormat="dd/MM/yyyy"
+          value={date}
+          onChange={handleDateChange}
+          renderInput={(params) => (
+            <TextField {...params} sx={{ width: 'fit-content' }} />
+          )}
+        />
+      </LocalizationProvider>
       <Button
         variant="contained"
         size="large"
@@ -94,7 +111,7 @@ export function PostGratitude() {
           variant="filled"
           severity="success"
           sx={{ width: '100%' }}>
-          Gratitude Post Saved!
+          To-Do Saved!
         </Alert>
       </Snackbar>
       <Snackbar
@@ -106,7 +123,7 @@ export function PostGratitude() {
           variant="filled"
           severity="error"
           sx={{ width: '100%' }}>
-          Failed to save post.
+          Failed to save To-Do.
         </Alert>
       </Snackbar>
       <Snackbar
@@ -118,7 +135,7 @@ export function PostGratitude() {
           variant="filled"
           severity="error"
           sx={{ width: '100%' }}>
-          Gratitude post cannot be empty.
+          To-Do cannot be empty.
         </Alert>
       </Snackbar>
     </div>

@@ -64,7 +64,7 @@ export const MoodCard = ({ mood, date, comment, id }) => {
     console.log(event);
     const allowClick =
       event.target.ariaLabel === 'mood-card' ||
-      event.target.ariaLabel.includes('Emoji');
+      event.target.ariaLabel?.includes('Emoji');
     setShowFull((prevState) => allowClick && !prevState);
   };
 
@@ -89,6 +89,7 @@ export const MoodCard = ({ mood, date, comment, id }) => {
           ':hover': {
             '& .MuiButtonBase-root': { display: 'inline-flex' },
             boxShadow: 6,
+            cursor: 'pointer',
           },
           '@media (pointer:coarse)': {
             '& .MuiButtonBase-root': { display: 'inline-flex' },
@@ -112,12 +113,15 @@ export const MoodCard = ({ mood, date, comment, id }) => {
               label="Great Mood Emoji"
               aria-label="mood-card"
             />
-            <Typography variant="h6" sx={{ pl: 1 }} aria-label="mood-card">
+            <Typography
+              variant="h6"
+              sx={{ pl: 1, minWidth: 'fit-content' }}
+              aria-label="mood-card">
               {mood}
             </Typography>
             <Typography
               variant="body1"
-              sx={{ ml: 'auto' }}
+              sx={{ ml: 'auto', minWidth: 'fit-content' }}
               aria-label="mood-card">
               {date}
             </Typography>

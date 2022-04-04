@@ -4,12 +4,20 @@ import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { LayoutContext } from '../../Layout';
 import { MoodCard } from './MoodCard';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectMoods } from '../../../features/userSlice';
 import { AddButton } from './AddButton';
 import { formatDate } from '../../../utils/date';
+import { InfoButton } from '../../InfoButton';
 
 const classname = bem('mood-journal');
+
+const information =
+  'Journaling your thoughts, emotions, and challenges has been shown to reduce anxiety and depression. ' +
+  'Here are some reasons why: ' +
+  'It Helps You Determine a Course of Action, It Helps You Express Your Emotions, It Will Support Your Healing Process, ' +
+  'It Helps Reveal What Your Triggers Are, It Helps You Find the Silver Lining [https://www.healthline.com/health/how-to-keep-mood-journal, https://www.lifehack.org/875824/mood-journal] ' +
+  'Click on a mood card below to see your comments';
 
 export function MoodJournal() {
   const { isDesktop, isTabletLarge, isTabletSmall } =
@@ -18,14 +26,14 @@ export function MoodJournal() {
 
   const headerFont =
     isDesktop || isTabletLarge ? 'h2' : isTabletSmall ? 'h3' : 'h4';
-  const paddingValue = isDesktop || isTabletLarge ? 3 : isTabletSmall ? 2 : 1;
   return (
     <div className={classname()}>
-      <Typography variant={headerFont} pb={paddingValue}>
-        Mood Journal
-      </Typography>
+      <div className={classname('title')}>
+        <Typography variant={headerFont}>Mood Journal</Typography>
+        <InfoButton information={information} />
+      </div>
       {moods?.length ? (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, pb: 2 }}>
           <Grid
             container
             spacing={{ xs: 2, md: 3 }}

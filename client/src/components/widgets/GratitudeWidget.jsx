@@ -9,39 +9,52 @@ import {
 import React from 'react';
 import { ArcGauge } from '@progress/kendo-react-gauges';
 import '@progress/kendo-theme-default/dist/all.css';
+import { useSelector } from 'react-redux';
+import { selectGratitudePosts } from '../../features/userSlice';
+import _ from 'lodash';
 
 const colors = [
   {
-    to: 25,
-    color: '#0058e9',
+    to: 33,
+    color: '#e53935',
   },
   {
-    from: 25,
-    to: 50,
-    color: '#37b400',
+    from: 34,
+    to: 67,
+    color: '#fdd835',
   },
   {
-    from: 50,
-    to: 75,
-    color: '#ffc000',
-  },
-  {
-    from: 75,
-    color: '#f31700',
+    from: 68,
+    to: 100,
+    color: '#43a047',
   },
 ];
 
-const posts = 2;
-const target = 3;
+const target = 3; // TODO make customisable target
+
 export function GratitudeWidget() {
+  const posts = useSelector(selectGratitudePosts); // have to check for posts created TODAY (use isToday func)
+  const isToday = (post) => {
+    const today = new Date().setHours(0, 0, 0, 0);
+    const postDay = new Date(post.date).setHours(0, 0, 0, 0);
+    return today === postDay;
+  };
+
+  const filteredPosts = _.filter(posts, isToday);
+  const message =
+    filteredPosts.length === 0
+      ? 'Create a new post now.'
+      : filteredPosts.length === 3
+      ? 'Well done!'
+      : 'Keep going!';
   const arcOptions = {
-    value: (posts / target) * 100,
+    value: (filteredPosts.length / target) * 100,
     colors,
   };
   const arcCenterRenderer = (value, color) => {
     return (
       <Typography variant="h4" align="center" style={{ color: color }}>
-        {posts}/{target}
+        {filteredPosts.length}/{target}
       </Typography>
     );
   };
@@ -52,9 +65,6 @@ export function GratitudeWidget() {
           <Typography variant="h5" component="div">
             Gratitude Wall Posts
           </Typography>
-          {/*<Typography variant="h4" align="center" py={1} color="#1976d2">*/}
-          {/*  2/3*/}
-          {/*</Typography>*/}
           <ArcGauge
             {...arcOptions}
             arcCenterRender={arcCenterRenderer}
@@ -65,7 +75,7 @@ export function GratitudeWidget() {
             }}
           />
           <Typography variant="body2" align="center">
-            of your daily target. Well done!
+            of your daily target. {message}
           </Typography>
         </CardContent>
         <CardActions>
