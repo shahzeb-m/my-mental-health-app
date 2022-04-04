@@ -6,19 +6,17 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const classname = bem('masthead-navigation');
 
-//TODO create object of key/name pairs to use key as href for page
 const pages = [
-  'Mood Journal',
-  'Gratitude Wall',
-  'Worry Not',
-  'My To-do',
-  'Knowledge Hub',
-  'Breathing',
+  { label: 'Mood Journal', href: '/mood-journal' },
+  { label: 'Gratitude Wall', href: '/gratitude-wall' },
+  { label: 'Worry Not', href: '/worry-not' },
+  { label: 'My To-do', href: '/my-to-do' },
+  { label: 'Knowledge Hub', href: '/knowledge-hub' },
+  { label: 'Breathing', href: '/breathing' },
 ];
 
 export function Navigation() {
@@ -60,8 +58,12 @@ export function Navigation() {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}>
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem
+                component="a"
+                key={page.href}
+                href={page.href}
+                onClick={handleCloseNavMenu}>
+                {page.label}
               </MenuItem>
             ))}
           </Menu>
@@ -69,7 +71,8 @@ export function Navigation() {
       ) : (
         pages.map((page) => (
           <Button
-            key={page}
+            key={page.href}
+            href={page.href}
             sx={{
               my: 2,
               color: 'white',
@@ -78,7 +81,7 @@ export function Navigation() {
                 backgroundColor: 'rgba(0, 0, 0, 0.04)',
               },
             }}>
-            {page}
+            {page.label}
           </Button>
         ))
       )}

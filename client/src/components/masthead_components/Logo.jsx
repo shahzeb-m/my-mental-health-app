@@ -17,7 +17,14 @@ export function Logo() {
           (isTabletSmall && 'tablet-small') ||
           (isMobile && 'mobile'),
       )}>
-      <img src={appLogo} className={classname('image')} />
+      <a href="/home" className={classname('link')}>
+        <img
+          alt="MindSpa Logo"
+          title="MindSpa Logo"
+          src={appLogo}
+          className={classname('image')}
+        />
+      </a>
     </div>
   );
 }

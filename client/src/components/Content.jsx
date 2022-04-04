@@ -13,7 +13,14 @@ import { MoodJournal } from './pages/mood_journal/MoodJournal';
 import { LogMood } from './pages/mood_journal/LogMood';
 import { GratitudeWall } from './pages/gratitude_wall/GratitudeWall';
 import { PostGratitude } from './pages/gratitude_wall/PostGratitude';
-import { MyToDo } from './pages/MyToDo';
+import { MyToDo } from './pages/my_to_do/MyToDo';
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
+import Settings from './pages/Settings';
+import { RequireAuth } from './RequireAuth';
+import { Breathing } from './pages/Breathing';
+import { AddToDo } from './pages/my_to_do/AddToDo';
+import { WorryNot } from './pages/WorryNot';
 
 // this component will handle the rendering of the selected page/activity
 export function Content() {
@@ -22,13 +29,96 @@ export function Content() {
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="/" element={<ContentWrapper />}>
-          <Route path="home" element={<Home />} />
-          <Route path="knowledge-hub" element={<KnowledgeHub />} />
-          <Route path="mood-journal" element={<MoodJournal />} />
-          <Route path="mood-journal/new-entry" element={<LogMood />} />
-          <Route path="gratitude-wall" element={<GratitudeWall />} />
-          <Route path="gratitude-wall/new-entry" element={<PostGratitude />} />
-          <Route path="my-to-do" element={<MyToDo />} />
+          <Route
+            path="home"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="knowledge-hub"
+            element={
+              <RequireAuth>
+                <KnowledgeHub />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="worry-not"
+            element={
+              <RequireAuth>
+                <WorryNot />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="mood-journal"
+            element={
+              <RequireAuth>
+                <MoodJournal />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="mood-journal/new-entry"
+            element={
+              <RequireAuth>
+                <LogMood />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="gratitude-wall"
+            element={
+              <RequireAuth>
+                <GratitudeWall />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="gratitude-wall/new-entry"
+            element={
+              <RequireAuth>
+                <PostGratitude />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="my-to-do"
+            element={
+              <RequireAuth>
+                <MyToDo />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="my-to-do/new-entry"
+            element={
+              <RequireAuth>
+                <AddToDo />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="breathing"
+            element={
+              <RequireAuth>
+                <Breathing />
+              </RequireAuth>
+            }
+          />
+          <Route path="login" element={<LogIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route
+            path="settings"
+            element={
+              <RequireAuth>
+                <Settings />
+              </RequireAuth>
+            }
+          />
         </Route>
       </Routes>
     </Router>
